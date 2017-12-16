@@ -2,8 +2,6 @@ import { h, Component } from 'preact';
 import { Router } from 'preact-router';
 import '~/style/global.common';
 import history from '~/core/history';
-
-import HeaderBar from './HeaderBar';
 import Home from '~/containers/home';
 import Profile from '~/containers/profile';
 
@@ -19,7 +17,6 @@ export default class App extends Component {
 	render() {
 		return (
 			<div id="app">
-				<HeaderBar />
 				<Router onChange={this.handleRoute} history={history}>
 					<Home path="/" />
 					<Profile path="/profile/" user="me" />

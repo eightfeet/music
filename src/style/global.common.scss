@@ -400,12 +400,12 @@ noShadow
 /*换行*/
 .ba{word-break:break-all}
 body {
-		max-width: 640px;
+		max-width: $maxwidth;
     margin: 0 auto;
 		position: relative;
 }
 #app {
-    max-width: 640px;
+    max-width: $maxwidth;
     margin: 0 auto;
     position: relative;
     height: 100%;
