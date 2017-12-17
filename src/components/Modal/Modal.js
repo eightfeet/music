@@ -23,6 +23,7 @@ const style = {
 		bottom                     : 'auto',
 		minHeight                  : '20%',
 		maxHeight                  : '80%',
+		maxWidth				   : '30rem',
 		border                     : 'node',
 		background                 : '#fff',
 		overflow                   : 'auto',
