@@ -1,6 +1,6 @@
-import request from "~/core/request";
+const content = [{
+	"name": "关山月",
+	"url": "guanshanyue"
+}];
 
-
-export function apiTest(){
-	return request.get('/mf/commonservice/api/provinces');
-}
+export default content;

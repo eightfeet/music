@@ -1,0 +1,37 @@
+$baserem :8rem;
+
+.root {
+	height: 100%;
+	width: 100%;
+	overflow: auto;
+	-webkit-overflow-scrolling:touch;
+	position: absolute;
+	left: 0;
+	top: 0;
+	bottom: 0;
+	right: 0;
+}
+
+.main {
+	padding: 1rem;
+	overflow: hidden;
+}
+
+.searchbar {
+	height: 2.5rem;
+	padding: .5rem;
+	z-index: 10;
+	position: absolute;
+	top: 0;
+	background-color: #eee;
+	right:0;
+	left: 0;
+	position: absolute;
+	top: 0;
+}
+
+.list {
+	height: 4rem;
+	line-height: 4rem;
+	border-bottom: 1px solid #eee;
+}

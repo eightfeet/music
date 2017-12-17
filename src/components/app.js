@@ -4,12 +4,23 @@ import '~/style/global.common';
 import history from '~/core/history';
 import Home from '~/containers/home';
 import Profile from '~/containers/profile';
+import { connect } from 'preact-redux';
+import { bindActionCreators } from 'redux';
+import { setRuntimeVariable } from '~/actions/user';
+import data from '~/servicer/data';
 
-export default class App extends Component {
+class App extends Component {
 	/** Gets fired when the route changes.
 	 *	@param {Object} event		"change" event from [preact-router](http://git.io/preact-router)
 	 *	@param {string} event.url	The newly routed URL
 	 */
+
+
+	componentWillMount() {
+		this.props.setStore({ name: 'data', value: data });
+	}
+
+
 	handleRoute = e => {
 		this.currentUrl = e.url;
 	};
@@ -19,10 +30,20 @@ export default class App extends Component {
 			<div id="app">
 				<Router onChange={this.handleRoute} history={history}>
 					<Home path="/" />
-					<Profile path="/profile/" user="me" />
-					<Profile path="/profile/:user" />
+					<Profile path="/profile/:name" />
 				</Router>
 			</div>
 		);
 	}
 }
+
+function mapStateToProps(state) {
+	return state;
+}
+
+
+function mapDispatchToProps(dispatch){
+	return bindActionCreators({ setStore: setRuntimeVariable}, dispatch);
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);
