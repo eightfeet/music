@@ -53,11 +53,11 @@ class Profile extends Component {
 
 
 	componentDidMount() {
-		// data.content.forEach((item, index) => {
+		// const data = JSON.parse(JSON.stringify(this.props.data[1].content));
+		// data.forEach((item, index) => {
 		// 	item.id = (index + 1).toString();
 		// });
-
-		// console.log(JSON.stringify(data.content));
+		// console.log(JSON.stringify(data));
 	}
 
 	componentWillUnmount() {
@@ -153,12 +153,23 @@ class Profile extends Component {
 		}
 	}
 
+	renderLong = (long) => {
+		if (long) {
+			return (<div className={this.state.scss.long} >.</div>);
+		}
+	}
+
 	resetTimer = () => {
 		clearInterval(this.timer);
 		let oprationTimes = this.state.times;
 		const {currentindex, items} = this.state;
 		if (currentindex === items.length - 1) {
 			this.init();
+			this.root.scrollTop = 0;
+			this.setState({
+				start: false,
+				startReady: 0
+			});
 			return;
 		}
 		let oprationInd = currentindex;
@@ -187,6 +198,8 @@ class Profile extends Component {
 			}
 		}, oprationTimes );
 	}
+
+
 
 	handleStart = () => {
 		this.setState({
@@ -299,6 +312,7 @@ class Profile extends Component {
 										{this.renderBy(item.by)}
 										{this.renderAcross(item.across)}
 										{this.renderShake(item.shake)}
+										{this.renderLong(item.long)}
 									</div>
 								</div>
 							))

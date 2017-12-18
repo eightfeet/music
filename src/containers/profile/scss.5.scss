@@ -174,4 +174,18 @@ $baserem :5rem;
 	z-index: 11;
 }
 
-
+.long {
+	font-size: $baserem * 0.2;
+	height: $baserem * 0.15;
+	line-height: $baserem * 0.1;
+	font-weight: bold;
+	position: absolute;
+	text-align: center;
+	left: 50%;
+	margin-left: -25%;
+	border-radius: 1rem 1rem 0 0;
+	border-top: 2px solid #000;
+	width: 50%;
+	top: $baserem * 0.2;
+	z-index: 11;
+}
