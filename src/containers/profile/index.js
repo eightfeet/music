@@ -20,7 +20,6 @@ class Profile extends Component {
 		this.state = {
 			items: [],
 			currentindex: 0,
-			preludeInd: 0,
 			title: '',
 			authora: '',
 			authorb: '',
@@ -33,6 +32,7 @@ class Profile extends Component {
 			startReady: 0,
 			audio: '1',
 			prelude: false,
+			hasPrelude: false
 		};
 		this.timer = null;
 	}
@@ -47,8 +47,8 @@ class Profile extends Component {
 					title: element.title,
 					authora: element.authora,
 					authorb: element.authorb,
-					preludeInd: (element.preludeInd || 0),
-					oldContent: JSON.parse(JSON.stringify(element))
+					oldContent: JSON.parse(JSON.stringify(element)),
+					hasPrelude: element.hasPrelude
 				});
 			}
 		});
@@ -61,6 +61,7 @@ class Profile extends Component {
 		// 	item.id = (index + 1).toString();
 		// });
 		// console.log(JSON.stringify(data));
+		this.init();
 	}
 
 	componentWillUnmount() {
@@ -68,14 +69,32 @@ class Profile extends Component {
 	}
 
 	init = () => {
+		let operationData = JSON.parse(JSON.stringify(this.state.oldContent.content));
+
+
+		if (this.state.prelude) {
+			const tempArr = [];
+			operationData.forEach(item => {
+				if (item.prelude !== -1 && item.prelude !== 0 && item.prelude !== 1) {
+					tempArr.push(item);
+				}
+			});
+			operationData = tempArr;
+		}
+
 		this.setState({
-			items: JSON.parse(JSON.stringify(this.state.oldContent.content)),
+			items: operationData,
 			times: this.state.oldContent.rhythm,
-			currentindex: 0,
-			prelude: false
-		}, () => {
-			console.log(this.state);
+			currentindex: 0
 		});
+	}
+
+	handlePrelude = () => {
+		this.setState({
+			prelude: !this.state.prelude
+		}, () => {
+			this.init();
+		})
 	}
 
 	// Model
@@ -181,7 +200,7 @@ class Profile extends Component {
 	resetTimer = () => {
 		clearInterval(this.timer);
 		let oprationTimes = this.state.times;
-		const {currentindex, items, prelude, preludeInd} = this.state;
+		const {currentindex, items} = this.state;
 		if (currentindex === items.length - 1) {
 			this.init();
 			this.root.scrollTop = 0;
@@ -192,9 +211,6 @@ class Profile extends Component {
 			return;
 		}
 		let oprationInd = currentindex;
-		if (prelude) {
-			oprationInd = preludeInd;
-		}
 		items[oprationInd].selected = true;
 		if (this.state.items[oprationInd].not === 8) {
 			oprationTimes = oprationTimes / 2;
@@ -207,14 +223,9 @@ class Profile extends Component {
 		}
 		this.timer = setInterval(() => {
 			this.root.scrollTop = this.item.childNodes[oprationInd].offsetTop - 100;
-			const ind = prelude ? {
-				preludeInd: oprationInd +=1
-			} : {
-				currentindex: oprationInd +=1
-			}
 
 			this.setState(
-				{items, ...ind},
+				{items, currentindex: oprationInd +=1},
 				() => {
 					clearInterval(this.timer);
 					this.resetTimer();
@@ -243,24 +254,6 @@ class Profile extends Component {
 			}, 1000);
 		});
 	}
-
-	handleStartQuick = () => {
-		this.setState({
-			start: true,
-			startReady: 6,
-			prelude: true
-		}, () => {
-
-			this.readTimer = setInterval(() => {
-				this.setState({startReady: this.state.startReady - 1});
-				if (this.state.startReady === 0) {
-					clearInterval(this.readTimer);
-					this.resetTimer();
-				}
-			}, 1000);
-		});
-	}
-
 	handleStop = () => {
 		clearInterval(this.timer);
 		clearInterval(this.readTimer);
@@ -312,7 +305,7 @@ class Profile extends Component {
 	}
 
 	render() {
-		const { authora, authorb, title, start, startReady, prelude, preludeInd } = this.state;
+		const { authora, authorb, title, start, startReady, hasPrelude, prelude } = this.state;
 		return (
 			<div className={this.state.scss.root} ref={(ref)=>{this.root = ref;}}>
 				<div>
@@ -330,11 +323,13 @@ class Profile extends Component {
 							<span>
 								<button className="bg-green white pd-5 mgr1" onClick={this.handleStart}>开始</button>
 								{
-									preludeInd > 0 ? <button className="bg-orange white pd-5 mgr1" onClick={this.handleStartQuick}>无过门开始</button> : null
+									hasPrelude ? <button className={`${prelude ? 'bg-green' : 'bg-orange'} white pd-5 mgr1`} onClick={this.handlePrelude}>
+										{prelude ? '显示伴奏' : '隐藏伴奏'}
+									</button> : null
 								}
 							</span>
-					}
 
+					}
 					<button className="bg-green white pd-5" onClick={this.handleOpenModal}>设置</button>
 					{
 						startReady > 0 ? <span className="blue font-biggest pdl2">{ startReady }</span> : ''
