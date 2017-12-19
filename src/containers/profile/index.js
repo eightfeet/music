@@ -20,6 +20,7 @@ class Profile extends Component {
 		this.state = {
 			items: [],
 			currentindex: 0,
+			preludeInd: 0,
 			title: '',
 			authora: '',
 			authorb: '',
@@ -30,7 +31,8 @@ class Profile extends Component {
 			selected: '5',
 			start: false,
 			startReady: 0,
-			audio: '1'
+			audio: '1',
+			prelude: false,
 		};
 		this.timer = null;
 	}
@@ -45,6 +47,7 @@ class Profile extends Component {
 					title: element.title,
 					authora: element.authora,
 					authorb: element.authorb,
+					preludeInd: (element.preludeInd || 0),
 					oldContent: JSON.parse(JSON.stringify(element))
 				});
 			}
@@ -68,7 +71,8 @@ class Profile extends Component {
 		this.setState({
 			items: JSON.parse(JSON.stringify(this.state.oldContent.content)),
 			times: this.state.oldContent.rhythm,
-			currentindex: 0
+			currentindex: 0,
+			prelude: false
 		}, () => {
 			console.log(this.state);
 		});
@@ -153,16 +157,31 @@ class Profile extends Component {
 		}
 	}
 
+	renderTr = (tr) => {
+		if (tr) {
+			return (<div className={this.state.scss.tr} >tr</div>);
+		}
+	}
+
 	renderLong = (long) => {
 		if (long) {
 			return (<div className={this.state.scss.long} >.</div>);
 		}
 	}
 
+	renderPrelude = (prelude) => {
+		if (prelude === -1) {
+			return (<div className={this.state.scss.preludeleft} >{'('}</div>);
+		}
+		if (prelude === 1) {
+			return (<div className={this.state.scss.preluderight} >{')'}</div>);
+		}
+	}
+
 	resetTimer = () => {
 		clearInterval(this.timer);
 		let oprationTimes = this.state.times;
-		const {currentindex, items} = this.state;
+		const {currentindex, items, prelude, preludeInd} = this.state;
 		if (currentindex === items.length - 1) {
 			this.init();
 			this.root.scrollTop = 0;
@@ -173,6 +192,9 @@ class Profile extends Component {
 			return;
 		}
 		let oprationInd = currentindex;
+		if (prelude) {
+			oprationInd = preludeInd;
+		}
 		items[oprationInd].selected = true;
 		if (this.state.items[oprationInd].not === 8) {
 			oprationTimes = oprationTimes / 2;
@@ -185,9 +207,14 @@ class Profile extends Component {
 		}
 		this.timer = setInterval(() => {
 			this.root.scrollTop = this.item.childNodes[oprationInd].offsetTop - 100;
+			const ind = prelude ? {
+				preludeInd: oprationInd +=1
+			} : {
+				currentindex: oprationInd +=1
+			}
 
 			this.setState(
-				{items, currentindex: oprationInd +=1},
+				{items, ...ind},
 				() => {
 					clearInterval(this.timer);
 					this.resetTimer();
@@ -216,6 +243,24 @@ class Profile extends Component {
 			}, 1000);
 		});
 	}
+
+	handleStartQuick = () => {
+		this.setState({
+			start: true,
+			startReady: 6,
+			prelude: true
+		}, () => {
+
+			this.readTimer = setInterval(() => {
+				this.setState({startReady: this.state.startReady - 1});
+				if (this.state.startReady === 0) {
+					clearInterval(this.readTimer);
+					this.resetTimer();
+				}
+			}, 1000);
+		});
+	}
+
 	handleStop = () => {
 		clearInterval(this.timer);
 		clearInterval(this.readTimer);
@@ -267,7 +312,7 @@ class Profile extends Component {
 	}
 
 	render() {
-		const { authora, authorb, title, start, startReady } = this.state;
+		const { authora, authorb, title, start, startReady, prelude, preludeInd } = this.state;
 		return (
 			<div className={this.state.scss.root} ref={(ref)=>{this.root = ref;}}>
 				<div>
@@ -282,8 +327,14 @@ class Profile extends Component {
 									<button className="bg-green white pd-5 mgr1" onClick={this.handleReset}>重置</button>
 								</span>
 							) :
-							<button className="bg-green white pd-5 mgr1" onClick={this.handleStart}>开始</button>
+							<span>
+								<button className="bg-green white pd-5 mgr1" onClick={this.handleStart}>开始</button>
+								{
+									preludeInd > 0 ? <button className="bg-orange white pd-5 mgr1" onClick={this.handleStartQuick}>无过门开始</button> : null
+								}
+							</span>
 					}
+
 					<button className="bg-green white pd-5" onClick={this.handleOpenModal}>设置</button>
 					{
 						startReady > 0 ? <span className="blue font-biggest pdl2">{ startReady }</span> : ''
@@ -313,6 +364,8 @@ class Profile extends Component {
 										{this.renderAcross(item.across)}
 										{this.renderShake(item.shake)}
 										{this.renderLong(item.long)}
+										{this.renderPrelude(item.prelude)}
+										{this.renderTr(item.tr)}
 									</div>
 								</div>
 							))

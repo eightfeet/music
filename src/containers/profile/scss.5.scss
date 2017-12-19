@@ -158,6 +158,7 @@ $baserem :5rem;
 	font-weight: bold;
 	position: absolute;
 	right: 0.5rem;
+	font-style: italic;
 	top: $baserem * 0.2;
 	z-index: 11;
 }
@@ -171,6 +172,19 @@ $baserem :5rem;
 	text-align: center;
 	width: 100%;
 	top: $baserem * 0.2;
+	z-index: 11;
+}
+
+.tr {
+	font-size: $baserem * 0.1;
+	height: $baserem * 0.15;
+	line-height: $baserem * 0.1;
+	font-weight: bold;
+	position: absolute;
+	text-align: center;
+	width: 100%;
+	top: $baserem * 0.15;
+	font-style: italic;
 	z-index: 11;
 }
 
@@ -188,4 +202,25 @@ $baserem :5rem;
 	width: 50%;
 	top: $baserem * 0.2;
 	z-index: 11;
+}
+
+.preludeleft {
+	height: $baserem;
+	display: inline-block;
+	line-height: $baserem;
+	position: absolute;
+	top: 0;
+	left: 0;
+	color: $orange
+}
+
+.preluderight {
+	height: $baserem;
+	display: inline-block;
+	line-height: $baserem;
+	position: absolute;
+	top: 0;
+	right: 0.3rem;
+	z-index: 13;
+	color: $orange
 }

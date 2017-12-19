@@ -68,7 +68,6 @@ $baserem :7rem;
 
 .gamut {
 	font-size: $baserem * 0.2;
-	font-weight: bolder;
 }
 
 .by {
@@ -159,6 +158,7 @@ $baserem :7rem;
 	font-weight: bold;
 	position: absolute;
 	right: 0.5rem;
+	font-style: italic;
 	top: $baserem * 0.2;
 	z-index: 11;
 }
@@ -175,6 +175,52 @@ $baserem :7rem;
 	z-index: 11;
 }
 
-.selected {
-	color: red;
+.tr {
+	font-size: $baserem * 0.1;
+	height: $baserem * 0.15;
+	line-height: $baserem * 0.1;
+	font-weight: bold;
+	position: absolute;
+	text-align: center;
+	width: 100%;
+	top: $baserem * 0.15;
+	font-style: italic;
+	z-index: 11;
+}
+
+.long {
+	font-size: $baserem * 0.2;
+	height: $baserem * 0.15;
+	line-height: $baserem * 0.1;
+	font-weight: bold;
+	position: absolute;
+	text-align: center;
+	left: 50%;
+	margin-left: -25%;
+	border-radius: 1rem 1rem 0 0;
+	border-top: 2px solid #000;
+	width: 50%;
+	top: $baserem * 0.2;
+	z-index: 11;
+}
+
+.preludeleft {
+	height: $baserem;
+	display: inline-block;
+	line-height: $baserem;
+	position: absolute;
+	top: 0;
+	left: 0;
+	color: $orange
+}
+
+.preluderight {
+	height: $baserem;
+	display: inline-block;
+	line-height: $baserem;
+	position: absolute;
+	top: 0;
+	right: 0.3rem;
+	z-index: 13;
+	color: $orange
 }
