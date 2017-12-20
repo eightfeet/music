@@ -30,6 +30,7 @@ class Profile extends Component {
 			selected: '5',
 			start: false,
 			startReady: 0,
+			customReady: 6,
 			audio: '1',
 			prelude: false,
 			hasPrelude: false
@@ -255,12 +256,12 @@ class Profile extends Component {
 	handleStart = () => {
 		this.setState({
 			start: true,
-			startReady: 6
+			startReady: this.state.customReady
 		}, () => {
 
 			this.readTimer = setInterval(() => {
 				this.setState({startReady: this.state.startReady - 1});
-				if (this.state.startReady === 0) {
+				if (this.state.startReady < 0) {
 					clearInterval(this.readTimer);
 					this.resetTimer();
 				}
@@ -280,7 +281,8 @@ class Profile extends Component {
 		this.root.scrollTop = 0;
 		this.setState({
 			start: false,
-			startReady: 0
+			startReady: 0,
+			customReady: 6
 		});
 		this.init();
 		clearInterval(this.readTimer);
@@ -303,6 +305,34 @@ class Profile extends Component {
 				break;
 			case '1':
 				this.setState({scss: c1, selected: '1'});
+				break;
+			default:
+				break;
+		}
+	}
+
+	selectCustomReady = (e) => {
+		switch (e.target.value) {
+			case '6':
+				this.setState({customReady: 6});
+				break;
+			case '5':
+				this.setState({customReady: 5});
+				break;
+			case '4':
+				this.setState({customReady: 4});
+				break;
+			case '3':
+				this.setState({customReady: 3});
+				break;
+			case '2':
+				this.setState({customReady: 2});
+				break;
+			case '1':
+				this.setState({customReady: 1});
+				break;
+			case '0':
+				this.setState({customReady: 0});
 				break;
 			default:
 				break;
@@ -406,8 +436,22 @@ class Profile extends Component {
 									<option value="2">是</option>
 								</select>
 							</div>
-							<div className="fl w3-5 al-r pdt-5">节拍(毫秒):&nbsp;</div>
-							<div className="fl w5"><input type="number" onChange={this.setTime} value={this.state.times} preload="毫秒" maxLength="4"/></div>
+							<div className="fl w3-5 al-r pdt-5 mgb1">节拍(毫秒):&nbsp;</div>
+							<div className="fl w5 mgb1"><input type="number" onChange={this.setTime} value={this.state.times} preload="毫秒" maxLength="4"/></div>
+
+							<div className="fl w3-5 al-r pdt-5">准备时间:&nbsp;</div>
+							<div className="fl w5 mgb1">
+								<select onChange={this.selectCustomReady} value={this.state.customReady} style={{width: '100%'}}>
+									<option value="6" selected>6秒</option>
+									<option value="5">5秒</option>
+									<option value="4">4秒</option>
+									<option value="3">3秒</option>
+									<option value="2">2秒</option>
+									<option value="1">1秒</option>
+									<option value="0">0秒</option>
+								</select>
+							</div>
+
 							<div className="al-c fl ww mgt2">
 								<button className="bg-green white pd-5" style={{width: '80%'}} onClick={this.handleHideModal}>确定</button>
 							</div>
