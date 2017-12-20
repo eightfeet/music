@@ -56,11 +56,11 @@ class Profile extends Component {
 
 
 	componentDidMount() {
-		// const data = JSON.parse(JSON.stringify(this.props.data[3].content));
-		// data.forEach((item, index) => {
-		// 	item.id = (index + 1).toString();
-		// });
-		// console.log(JSON.stringify(data));
+		const data = JSON.parse(JSON.stringify(this.props.data[4].content));
+		data.forEach((item, index) => {
+			item.id = (index + 1).toString();
+		});
+		console.log(JSON.stringify(data));
 
 		this.init();
 	}
@@ -186,6 +186,12 @@ class Profile extends Component {
 	renderTr = (tr) => {
 		if (tr) {
 			return (<div className={this.state.scss.tr} >tr</div>);
+		}
+	}
+
+	renderBeat = (beat) => {
+		if (beat) {
+			return (<div className={this.state.scss.beat} >扌</div>);
 		}
 	}
 
@@ -369,6 +375,7 @@ class Profile extends Component {
 										{this.renderPrelude(item.prelude)}
 										{this.renderTr(item.tr)}
 										{this.renderFold(item.fold)}
+										{this.renderBeat(item.beat)}
 									</div>
 								</div>
 							))

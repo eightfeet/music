@@ -237,3 +237,16 @@ $baserem :7rem;
 	font-style: italic;
 	z-index: 11;
 }
+
+.beat {
+	font-size: $baserem * 0.1;
+	height: $baserem * 0.15;
+	line-height: $baserem * 0.1;
+	font-weight: bold;
+	position: absolute;
+	text-align: center;
+	width: 100%;
+	top: $baserem * 0.15;
+	font-style: italic;
+	z-index: 11;
+}
