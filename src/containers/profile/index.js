@@ -57,11 +57,11 @@ class Profile extends Component {
 
 
 	componentDidMount() {
-		const data = JSON.parse(JSON.stringify(this.props.data[4].content));
-		data.forEach((item, index) => {
-			item.id = (index + 1).toString();
-		});
-		console.log(JSON.stringify(data));
+		// const data = JSON.parse(JSON.stringify(this.props.data[0].content));
+		// data.forEach((item, index) => {
+		// 	item.id = (index + 1).toString();
+		// });
+		// console.log(JSON.stringify(data));
 
 		this.init();
 	}
@@ -96,7 +96,7 @@ class Profile extends Component {
 			prelude: !this.state.prelude
 		}, () => {
 			this.init();
-		})
+		});
 	}
 
 	// Model
@@ -125,6 +125,15 @@ class Profile extends Component {
 	renderDivide = (divide) => {
 		if (divide) {
 			return (<div className={this.state.scss.divide} />);
+		}
+	}
+
+	renderDivideRepeat = (dividerepeat) => {
+		if (dividerepeat === -1) {
+			return (<div className={this.state.scss.dividerepeatleft} >:<span /><span /></div>);
+		}
+		if (dividerepeat === 1) {
+			return (<div className={this.state.scss.dividerepeatright} >:<span /><span /></div>);
 		}
 	}
 
@@ -390,6 +399,9 @@ class Profile extends Component {
 											{item.gamut}
 											{
 												this.renderDivide(item.divide)
+											}
+											{
+												this.renderDivideRepeat(item.dividerepeat)
 											}
 											{
 												this.renderDelay(item.delay)

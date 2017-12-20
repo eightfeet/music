@@ -250,3 +250,53 @@ $baserem :6rem;
 	font-style: italic;
 	z-index: 11;
 }
+
+.dividerepeatleft {
+	width: $baserem * 0.25;
+	height: $baserem * 0.8;
+	line-height: $baserem;
+	vertical-align:middle;
+	display: inline-block;
+	position: absolute;
+	vertical-align: middle;
+	right: -$baserem * 0.2;
+	background-color: #fff;
+	font-size: 2rem;
+	z-index: 10;
+	color: $orange;
+
+	span {
+		display: block;
+		margin-top: $baserem * 0.2;
+		height: 85%;
+		width: $baserem * 0.04;
+		background-color: $orange;
+		float: left;
+		margin-right: 1px;
+	}
+}
+
+.dividerepeatright {
+	width: $baserem * 0.25;
+	height: $baserem * 0.8;
+	line-height: $baserem;
+	vertical-align:middle;
+	display: inline-block;
+	position: absolute;
+	vertical-align: middle;
+	right: -$baserem * 0.1;
+	background-color: #fff;
+	font-size: 2rem;
+	z-index: 10;
+	color: $orange;
+
+	span {
+		display: block;
+		margin-top: $baserem * 0.2;
+		height: 85%;
+		width: $baserem * 0.04;
+		background-color: $orange;
+		float: right;
+		margin-right: 1px;
+	}
+}

@@ -71,7 +71,7 @@ class Home extends Component {
 				</div>
 				<div className={s.root} ref={(ref)=>{this.root = ref;}}>
 					<div className={s.main}>
-						<div className="w9-5 center pdt3"  style={{height: 3000}}>
+						<div className="w9-5 center pdt4 clearfix" >
 							{
 								list.map(item => <div onClick={this.handleItem(item.name)} className={s.list}>
 									{item.title}
