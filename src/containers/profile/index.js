@@ -5,6 +5,7 @@ import { bindActionCreators } from 'redux';
 import classNames from 'classNames';
 import { setRuntimeVariable } from '~/actions/user';
 import Modal from '~/components/Modal';
+import Request from '~/core/request';
 
 // import Loading from '~/components/Loading';
 import s from './cm';
@@ -40,31 +41,24 @@ class Profile extends Component {
 	}
 
 	componentWillMount() {
-		const { name, data } = this.props;
-		data.forEach(element => {
-			if (element.name === name) {
-				this.setState({
-					items: JSON.parse(JSON.stringify(element.content)),
-					times: element.rhythm,
-					title: element.title,
-					authora: element.authora,
-					authorb: element.authorb,
-					oldContent: JSON.parse(JSON.stringify(element)),
-					hasPrelude: element.hasPrelude
-				});
-			}
-		});
+		const { name } = this.props;
+		Request.get(`./servicer/${name}.json`).then(res => {
+			this.setState({
+				items: JSON.parse(JSON.stringify(res.content)),
+				times: res.rhythm,
+				title: res.title,
+				authora: res.authora,
+				authorb: res.authorb,
+				oldContent: JSON.parse(JSON.stringify(res)),
+				hasPrelude: res.hasPrelude
+			}, () => {
+				this.init();
+			});
+		}).catch(err=>console.log(2, err));
 	}
 
 
 	componentDidMount() {
-		// const data = JSON.parse(JSON.stringify(this.props.data[0].content));
-		// data.forEach((item, index) => {
-		// 	item.id = (index + 1).toString();
-		// });
-		// console.log(JSON.stringify(data));
-
-		this.init();
 	}
 
 	componentWillUnmount() {
@@ -406,34 +400,38 @@ class Profile extends Component {
 					<div ref={(ref)=>{this.item = ref;}}>
 						{
 							this.state.items.map((item, index) => (
-								<div id={index} data-index={item.id} className={`${this.state.scss.itemwrap} ${item.gap ? this.state.scss.gap : ''}`}>
-									<div className={this.state.scss.item}>
-										<div className={`${this.state.scss.gamut} ${item.selected ? s.selected : ''}`}>
-											{item.gamut}
-											{
-												this.renderDivide(item.divide)
-											}
-											{
-												this.renderDivideRepeat(item.dividerepeat)
-											}
-											{
-												this.renderDelay(item.delay)
-											}
-										</div>
-										{this.renderRest(item.rest)}
-										{this.rendNot(item.not)}
-										{this.renderDegree(item.degree)}
-										{this.renderBy(item.by)}
-										{this.renderAcross(item.across, item.gap)}
-										{this.renderShake(item.shake)}
-										{this.renderLong(item.long)}
-										{this.renderPrelude(item.prelude)}
-										{this.renderTr(item.tr)}
-										{this.renderFold(item.fold)}
-										{this.renderBeat(item.beat)}
-										{this.renderFadeIn(item.fadeIn)}
-										{this.renderFadeIn(item.fadeOut)}
-									</div>
+								<div id={index} data-index={item.id} className={`${!item.partTitle ? this.state.scss.itemwrap : s.parttitle} ${item.gap ? this.state.scss.gap : ''}`}>
+									{
+										item.partTitle ?
+											<h4>{item.gamut}</h4> :
+											<div className={this.state.scss.item}>
+												<div className={`${this.state.scss.gamut} ${item.selected ? s.selected : ''}`}>
+													{item.gamut}
+													{
+														this.renderDivide(item.divide)
+													}
+													{
+														this.renderDivideRepeat(item.dividerepeat)
+													}
+													{
+														this.renderDelay(item.delay)
+													}
+												</div>
+												{this.renderRest(item.rest)}
+												{this.rendNot(item.not)}
+												{this.renderDegree(item.degree)}
+												{this.renderBy(item.by)}
+												{this.renderAcross(item.across, item.gap)}
+												{this.renderShake(item.shake)}
+												{this.renderLong(item.long)}
+												{this.renderPrelude(item.prelude)}
+												{this.renderTr(item.tr)}
+												{this.renderFold(item.fold)}
+												{this.renderBeat(item.beat)}
+												{this.renderFadeIn(item.fadeIn)}
+												{this.renderFadeIn(item.fadeOut)}
+											</div>
+									}
 								</div>
 							))
 						}

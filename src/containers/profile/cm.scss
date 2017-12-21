@@ -9,3 +9,14 @@
 	color: red;
 	font-weight: bolder;
 }
+
+.parttitle {
+	display: block;
+	width: 100% !important;
+	height: auto !important;
+
+	h4 {
+		padding-top: 1rem;
+		font-size: 1rem;
+	}
+}

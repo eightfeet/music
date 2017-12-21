@@ -4,6 +4,7 @@ import { connect } from 'preact-redux';
 import { bindActionCreators } from 'redux';
 import { setRuntimeVariable } from '~/actions/user';
 import history from '~/core/history';
+import Request from '~/core/request';
 import s from './scss';
 
 
@@ -18,20 +19,11 @@ class Home extends Component {
 
 
 	componentWillMount() {
-		const {data} = this.props;
-		const temp = [];
-		data.forEach(element => {
-			temp.push({
-				title: element.title,
-				name: element.name
+		Request.get('./servicer/catalog.json').then(res => {
+			this.setState({
+				list: res
 			});
-		});
-		this.setState({
-			list: temp
-		}, () => {
-			console.log(1, this.state.list);
-		});
-		console.log(2, temp);
+		}).catch(err=>console.log(2, err));
 	}
 
 	handleItem = (item) => () => {
