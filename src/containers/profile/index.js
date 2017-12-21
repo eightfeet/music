@@ -2,6 +2,7 @@ import { h, Component } from 'preact';
 
 import { connect } from 'preact-redux';
 import { bindActionCreators } from 'redux';
+import classNames from 'classNames';
 import { setRuntimeVariable } from '~/actions/user';
 import Modal from '~/components/Modal';
 
@@ -157,12 +158,12 @@ class Profile extends Component {
 		}
 	}
 
-	renderAcross = (across) => {
+	renderAcross = (across, gap) => {
 		if (across === -1 ) {
-			return (<div className={this.state.scss.leftacross} />);
+			return (<div className={classNames(this.state.scss.leftacross, gap ? this.state.scss.acrossgap : null)} />);
 		}
 		if (across === 0 ) {
-			return (<div className={this.state.scss.across} />);
+			return (<div className={classNames(this.state.scss.across, gap ? this.state.scss.acrossgap : null)} />);
 		}
 		if (across === 1 ) {
 			return (<div className={this.state.scss.rightacross} />);
@@ -172,6 +173,18 @@ class Profile extends Component {
 	renderDelay = (delay) => {
 		if (delay) {
 			return (<div className={this.state.scss.delay} />);
+		}
+	}
+
+	renderFadeIn = (fadeIn) => {
+		if (fadeIn) {
+			return (<div className={this.state.scss.fadein} style={{width: `${fadeIn * 2.5}rem`}} ><span>渐强</span></div>);
+		}
+	}
+
+	renderFadeOut = (fadeOut) => {
+		if (fadeOut) {
+			return (<div className={this.state.scss.fadeout} style={{width: `${fadeOut * 2.5}rem`}} ><span>渐弱</span></div>);
 		}
 	}
 
@@ -411,13 +424,15 @@ class Profile extends Component {
 										{this.rendNot(item.not)}
 										{this.renderDegree(item.degree)}
 										{this.renderBy(item.by)}
-										{this.renderAcross(item.across)}
+										{this.renderAcross(item.across, item.gap)}
 										{this.renderShake(item.shake)}
 										{this.renderLong(item.long)}
 										{this.renderPrelude(item.prelude)}
 										{this.renderTr(item.tr)}
 										{this.renderFold(item.fold)}
 										{this.renderBeat(item.beat)}
+										{this.renderFadeIn(item.fadeIn)}
+										{this.renderFadeIn(item.fadeOut)}
 									</div>
 								</div>
 							))

@@ -2,7 +2,8 @@ $baserem :5rem;
 
 .root {
 	height: 100%;
-	overflow: auto;
+	overflow-y: auto;
+	overflow-x: hidden;
 	-webkit-overflow-scrolling:touch;
 }
 
@@ -118,6 +119,11 @@ $baserem :5rem;
 	left: 0;
 	border-top: 1px solid #000;
 	z-index: 10;
+}
+
+.acrossgap {
+	padding-right: $baserem * 0.1 + $baserem * 0.25;
+	right: -$baserem * 0.25;
 }
 
 .rightacross {
@@ -298,5 +304,51 @@ $baserem :5rem;
 		background-color: $orange;
 		float: right;
 		margin-right: 1px;
+	}
+}
+
+.fadein {
+	font-size: $baserem * 0.1;
+	height: $baserem * 0.15;
+	line-height: $baserem * 0.1;
+	position: absolute;
+	text-align: center;
+	text-align: left;
+	width: 100%;
+	top: $baserem * 0.15;
+	font-style: italic;
+	left: 0;
+	z-index: 11;
+	background-image: url(./arrow.svg);
+	background-repeat: repeat-x;
+	text-indent: 2rem;
+	color: #999;
+
+	span {
+		background: #fff;
+		padding: 0 0.3rem;
+	}
+}
+
+.fadeout {
+	color: #999;
+	font-size: $baserem * 0.1;
+	height: $baserem * 0.15;
+	line-height: $baserem * 0.1;
+	position: absolute;
+	text-align: left;
+	text-indent: 2rem;
+	width: 100%;
+	top: $baserem * 0.15;
+	font-style: italic;
+	z-index: 11;
+	transform: rotate(180deg);
+	background-image: url(./arrow.svg);
+	background-repeat: repeat-x;
+	left: 0;
+
+	span {
+		background: #fff;
+		padding: 0 0.3rem;
 	}
 }
