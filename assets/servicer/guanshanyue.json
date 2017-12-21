@@ -1,8 +1,8 @@
 {
 	"title": "关山月",
 	"name": "guanshanyue",
-	"authora": "古曲(陈悦版节奏)",
-	"authorb": "八脚制作",
+	"authora": "古曲陈悦版洞箫谱",
+	"authorb": "E调洞音作5",
 	"rhythm": 1750,
 	"content": [
 		{"gamut":5,"degree":-1,"delay":true,"id":"1"},
@@ -226,6 +226,7 @@
 		{"gamut":1,"across":0,"id":"219"},
 		{"gamut":"—","across":0,"divide":true,"id":"220"},
 		{"gamut":1,"across":1,"id":"221"},
-		{"gamut":"0","divide":true,"id":"222"}
+		{"gamut":"0","divide":true,"id":"222"},
+		{"gamut":"<div class='al-c'>明月出天山，苍茫云海间。<br/>长风几万里，吹度玉门关。<br/>汉下白登道，胡窥青海湾。<br/>由来征战地，不见有人还。<br/>戍客望边色，思归多苦颜。<br/>高楼当此夜，叹息未应闲。</div>", "partTitle": true}
 	]
 }

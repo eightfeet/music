@@ -1,8 +1,8 @@
 {
 	"title": "寒山僧踪",
 	"name": "hanshansengzong",
-	"authora": "古曲(根据龚一、罗守诚录音听记)",
-	"authorb": "八脚制作",
+	"authora": "古曲",
+	"authorb": "根据龚一、罗守诚录音听记",
 	"rhythm": 1135,
 	"hasPrelude": true,
 	"content": [
@@ -191,6 +191,7 @@
         {"gamut":1},
         {"gamut":"—"},
         {"gamut":"—"},
-        {"gamut":"—","divide":true}
+		{"gamut":"—","divide":true},
+		{"gamut":"<div class='al-c'>夜客访禅登峦峰<br/>山间只一片雾朦胧<br/>水月镜花，心念浮动<br/>空不异色，色不异空<br/>回眸处灵犀不过一点通<br/>天地有醍醐在其中<br/>寒山鸣钟声声苦乐皆随风，君莫要逐云追梦<br/>拾得落红叶叶来去都从容，君何须寻觅僧踪</div>", "partTitle": true}
     ]
 }
