@@ -23,7 +23,7 @@ class Home extends Component {
 			this.setState({
 				list: res
 			});
-		}).catch(err=>console.log(2, err));
+		}).catch(err=>console.log(err));
 	}
 
 	handleItem = (item) => () => {

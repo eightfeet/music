@@ -54,7 +54,7 @@ class Profile extends Component {
 			}, () => {
 				this.init();
 			});
-		}).catch(err=>console.log(2, err));
+		}).catch(err=>console.log(err));
 	}
 
 
