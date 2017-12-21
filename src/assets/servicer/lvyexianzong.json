@@ -1,8 +1,8 @@
 {
 	"title": "绿野仙踪",
 	"name": "lvyexianzong",
-	"authora": "选自陈悦洞箫《乱红》F调洞音5",
-	"authorb": "八脚制作",
+	"authora": "选自陈悦洞箫",
+	"authorb": "《乱红》F调洞音5",
 	"rhythm": 1000,
 	"content": [
 		{"gamut":3,"by":2,"degree":1,"delay":true,"id":"1"},

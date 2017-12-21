@@ -6,8 +6,9 @@ import classNames from 'classNames';
 import { setRuntimeVariable } from '~/actions/user';
 import Modal from '~/components/Modal';
 import Request from '~/core/request';
+import history from '~/core/history';
 
-// import Loading from '~/components/Loading';
+import Loading from '~/components/Loading';
 import s from './cm';
 import c1 from './scss.1';
 import c2 from './scss.2';
@@ -41,8 +42,9 @@ class Profile extends Component {
 	}
 
 	componentWillMount() {
+		Loading.show();
 		const { name } = this.props;
-		Request.get(`./servicer/${name}.json`).then(res => {
+		Request.get(`/assets/servicer/${name}.json`).then(res => {
 			this.setState({
 				items: JSON.parse(JSON.stringify(res.content)),
 				times: res.rhythm,
@@ -53,8 +55,9 @@ class Profile extends Component {
 				hasPrelude: res.hasPrelude
 			}, () => {
 				this.init();
+				Loading.hide();
 			});
-		}).catch(err=>console.log(err));
+		}).catch(()=>Loading.hide());
 	}
 
 
@@ -363,6 +366,10 @@ class Profile extends Component {
 		this.setState({audio: e.target.value});
 	}
 
+	goHome = () => {
+		history.push('/');
+	}
+
 	render() {
 		const { authora, authorb, title, start, startReady, hasPrelude, prelude } = this.state;
 		return (
@@ -371,6 +378,13 @@ class Profile extends Component {
 					<audio ref={(ref)=>{this.audio = ref;}} src="./assets/data/6596.mp3">您的浏览器不支持 audio 标签。</audio>
 				</div>
 				<div className={s.btn}>
+					{
+						!start ?
+							<div className={s.menu} onClick={this.goHome}>
+								<div /><div /><div />
+							</div> :
+							null
+					}
 					{
 						start ?
 							(
@@ -403,7 +417,7 @@ class Profile extends Component {
 								<div id={index} data-index={item.id} className={`${!item.partTitle ? this.state.scss.itemwrap : s.parttitle} ${item.gap ? this.state.scss.gap : ''}`}>
 									{
 										item.partTitle ?
-											<h4>{item.gamut}</h4> :
+											<div className={s.con} dangerouslySetInnerHTML={{__html:item.gamut}} /> :
 											<div className={this.state.scss.item}>
 												<div className={`${this.state.scss.gamut} ${item.selected ? s.selected : ''}`}>
 													{item.gamut}

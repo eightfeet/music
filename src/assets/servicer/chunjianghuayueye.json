@@ -3,9 +3,9 @@
 	"name": "chunjianghuayueye",
 	"authora": "陈悦版洞箫谱",
 	"authorb": "1=G(G调萧筒音作5)",
-	"rhythm": 1335,
+	"rhythm": 1435,
 	"content": [
-		{"gamut":"【一】江楼钟鼓抒情、优美、婉转如歌江楼钟鼓抒情、优美、婉转如歌", "partTitle": true},
+		{"gamut":"<h4>【一】江楼钟鼓抒情、优美、婉转如歌江楼钟鼓抒情、优美、婉转如歌</h4>", "partTitle": true},
 		{"gamut":1,"by":2,"long":true,"degree":1},
 		{"gamut":"—","rest":true,"divide":true},
 
@@ -197,7 +197,7 @@
 		{"gamut":"—","rest":true,"divide":true},
 
 
-		{"gamut":"【二】渔舟唱晚归舟破水、浪花飞溅、撸声 “欸乃”", "partTitle": true},
+		{"gamut":"<h4>【二】渔舟唱晚归舟破水、浪花飞溅、撸声</h4> “欸乃”", "partTitle": true},
 		{"gamut":6,"by":7,"long":true,"shake":true},
 		{"gamut":"—","rest":true,"divide":true},
 
@@ -417,7 +417,7 @@
 		{"gamut":2,"shake":true},
 		{"gamut":"—","divide":true},
 
-		{"gamut":"【三】月下花影江风习习、花影婆娑", "partTitle": true},
+		{"gamut":"<h4>【三】月下花影江风习习、花影婆娑</h4>", "partTitle": true},
 		{"gamut":2,"degree":1,"by":1},
 		{"gamut":3,"degree":1,"by":2,"not":8},
 		{"gamut":2,"divide":true,"degree":1,"shake":true,"not":8},
@@ -607,7 +607,7 @@
 
 
 
-		{"gamut":"【四】尾声渔舟渐远、万籁皆寂", "partTitle": true},
+		{"gamut":"<h4>【四】尾声渔舟渐远、万籁皆寂</h4>", "partTitle": true},
 
 		{"gamut":6,"by":7,"not":8},
 		{"gamut":6,"gap":true,"beat":true,"not":8},
@@ -704,6 +704,7 @@
 		{"gamut":0},
 		{"gamut":0},
 		{"gamut":0},
-		{"gamut":0,"divide":true}
+		{"gamut":0,"divide":true},
+		{"gamut":"<div><p class='pdb1'>《春江花月夜》又称《夕阳箫鼓》，是古典民乐的代表作之一。因其意境深远，乐音悠长。后取意唐诗名篇《春江花月夜》更名。</p><p class='pdb1'>《夕阳箫鼓》又名《浔阳月夜》、《浔阳琵琶》或《浔阳曲》，这是一首著名的琵琶独奏曲，写的是浔阳（今江西九江）江上月夜，歌颂祖国山河之壮美，表现人民热爱祖国之情。</p></div>", "partTitle": true}
 	]
 }

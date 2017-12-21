@@ -7,7 +7,6 @@ import Profile from '~/containers/profile';
 import { connect } from 'preact-redux';
 import { bindActionCreators } from 'redux';
 import { setRuntimeVariable } from '~/actions/user';
-import data from '~/servicer/data';
 
 class App extends Component {
 	/** Gets fired when the route changes.
@@ -17,7 +16,7 @@ class App extends Component {
 
 
 	componentWillMount() {
-		this.props.setStore({ name: 'data', value: data });
+		// this.props.setStore();
 	}
 
 

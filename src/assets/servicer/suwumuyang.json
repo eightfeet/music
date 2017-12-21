@@ -1,8 +1,8 @@
 {
 	"title": "苏武牧羊",
 	"name": "suwumuyang",
-	"authora": "古曲(陈悦版节奏)",
-	"authorb": "八脚制作",
+	"authora": "古曲",
+	"authorb": "陈悦清吹版",
 	"rhythm": 1640,
 	"content": [
 		{"gamut":5,"shake":true,"id":"1"},
@@ -237,6 +237,7 @@
 		{"gamut":1,"shake":true,"across":-1,"id":"230"},
 		{"gamut":"—","across":0,"divide":true,"id":"231"},
 		{"gamut":1,"long":true,"across":1,"id":"232"},
-		{"gamut":"—","divide":true,"id":"233"}
+		{"gamut":"—","divide":true,"id":"233"},
+		{"gamut":"<div class='al-c'>苏武留胡节不辱，雪地又冰天，苦忍十九年，<br />渴饮雪，饥吞毡，牧羊北海边。<br />心存汉社稷，旄落犹未还，历尽难中难，<br />心如铁石坚，夜在塞上时听笳声入耳痛心酸。</div>", "partTitle": true}
 	]
 }

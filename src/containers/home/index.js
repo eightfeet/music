@@ -6,7 +6,7 @@ import { setRuntimeVariable } from '~/actions/user';
 import history from '~/core/history';
 import Request from '~/core/request';
 import s from './scss';
-
+import Loading from '~/components/Loading';
 
 class Home extends Component {
 	constructor(props) {
@@ -20,12 +20,17 @@ class Home extends Component {
 
 
 	componentWillMount() {
-		Request.get('./servicer/catalog.json').then(res => {
+		this.getCatalog();
+	}
+
+	getCatalog = () => {
+		Loading.show();
+		Request.get('/assets/servicer/catalog.json').then(res => {
 			this.setState({
 				list: JSON.parse(JSON.stringify(res)),
 				oldList: JSON.parse(JSON.stringify(res))
-			});
-		}).catch(err=>console.log(err));
+			}, ()=> Loading.hide());
+		}).catch(()=>Loading.hide());
 	}
 
 	handleItem = (item) => () => {
