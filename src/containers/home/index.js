@@ -13,6 +13,7 @@ class Home extends Component {
 		super(props);
 		this.state = {
 			list: [],
+			oldList: [],
 			searchval: ''
 		};
 	}
@@ -21,7 +22,8 @@ class Home extends Component {
 	componentWillMount() {
 		Request.get('./servicer/catalog.json').then(res => {
 			this.setState({
-				list: res
+				list: JSON.parse(JSON.stringify(res)),
+				oldList: JSON.parse(JSON.stringify(res))
 			});
 		}).catch(err=>console.log(err));
 	}
@@ -38,9 +40,9 @@ class Home extends Component {
 	}
 
 	handleSearch = (value) => {
-		const {data} = this.props;
+		const {oldList} = this.state;
 		const temp = [];
-		data.forEach(item => {
+		oldList.forEach(item => {
 			if (item.title.indexOf(value) !== -1 ) {
 				temp.push(item);
 			}
