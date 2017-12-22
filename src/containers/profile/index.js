@@ -45,6 +45,7 @@ class Profile extends Component {
 		Loading.show();
 		const { name } = this.props;
 		Request.get(`/assets/servicer/${name}.json`).then(res => {
+			this.namageData(res.content);
 			this.setState({
 				items: JSON.parse(JSON.stringify(res.content)),
 				times: res.rhythm,
@@ -66,6 +67,14 @@ class Profile extends Component {
 
 	componentWillUnmount() {
 		clearInterval(this.timer);
+	}
+
+	namageData = (items) => {
+		const data = JSON.parse(JSON.stringify(items));
+		data.forEach((item, index) => {
+			item.id = (index + 1).toString();
+		});
+		console.log(JSON.stringify(data));
 	}
 
 	init = () => {
@@ -156,6 +165,9 @@ class Profile extends Component {
 	}
 
 	renderAcross = (across, gap) => {
+		if (typeof across === 'string') {
+			return (<div className={classNames(this.state.scss.across, gap ? this.state.scss.acrossgap : null)} ><span> {across} </span></div>);
+		}
 		if (across === -1 ) {
 			return (<div className={classNames(this.state.scss.leftacross, gap ? this.state.scss.acrossgap : null)} />);
 		}

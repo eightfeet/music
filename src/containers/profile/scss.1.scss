@@ -119,6 +119,15 @@ $baserem :9rem;
 	left: 0;
 	border-top: 1px solid #000;
 	z-index: 10;
+	span {
+		background-color: #fff;
+		height: 0.8rem;
+		font-size: 0.8rem;
+		line-height: 0.5rem;
+		position: absolute;
+		padding: 0 0.1rem;
+		top: -0.2rem;
+	}
 }
 
 .acrossgap {
