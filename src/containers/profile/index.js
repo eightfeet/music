@@ -33,7 +33,7 @@ class Profile extends Component {
 			selected: '5',
 			start: false,
 			startReady: 0,
-			customReady: 6,
+			customReady: 0,
 			audio: '1',
 			prelude: false,
 			hasPrelude: false
@@ -45,7 +45,10 @@ class Profile extends Component {
 		Loading.show();
 		const { name } = this.props;
 		Request.get(`/assets/servicer/${name}.json`).then(res => {
-			this.namageData(res.content);
+			if (process.env.NODE_ENV === 'development') {
+				this.namageData(res.content);
+			}
+
 			this.setState({
 				items: JSON.parse(JSON.stringify(res.content)),
 				times: res.rhythm,
