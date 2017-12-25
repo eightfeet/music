@@ -1,0 +1,184 @@
+{
+	"title": "紫菱洲歌",
+	"name": "zilingzhouge",
+	"authora": "电视剧《红楼梦》插曲",
+	"authorb": "王立平 曲 筒音作低3",
+	"rhythm": 1335,
+	"hasPrelude": true,
+	"content": [
+
+		{"prelude":-1,"across":-1,"by":5,"gamut": 6},
+		{"prelude":0,"across":0,"gamut":"—"},
+		{"prelude":0,"across":0,"gamut":"—"},
+		{"prelude":0,"rest":true,"gamut": 6,"not": 8,"across":1},
+		{"prelude":0,"across":-1,"gamut": 5,"not": 16},
+		{"prelude":0,"across":"3","gamut": 3,"not": 16},
+		{"prelude":0,"gamut": 2,"not": 16,"across":1,"divide":true},
+
+		{"prelude":0,"across":-1,"gamut": 3},
+		{"prelude":0,"across":0,"gamut":"—"},
+		{"prelude":0,"across":0,"gamut":"—"},
+		{"prelude":0,"across":0,"gamut":"—","divide":true},
+
+		{"prelude":0,"gamut": 3,"across":1},
+		{"prelude":0,"rest":true,"gamut":"—"},
+		{"prelude":0,"gamut": 6,"degree": -1,"not": 8},
+		{"prelude":0,"gap":true,"gamut": 1,"not": 8},
+		{"prelude":0,"gamut": 5,"not": 8},
+		{"prelude":0,"gamut": 3,"not": 8,"divide":true},
+
+		{"prelude":0,"by":3,"gamut": 2},
+		{"prelude":0,"gamut":"—"},
+		{"prelude":0,"rest":true,"gamut":"—"},
+		{"prelude":0,"gamut": 3,"not": 16},
+		{"prelude":0,"gamut": 5,"not": 16},
+		{"prelude":0,"gamut": 3,"not": 16},
+		{"prelude":0,"gamut": 2,"not": 16,"divide":true},
+
+		{"prelude":0,"by":6,"gamut": 1},
+		{"prelude":0,"gamut":"—"},
+		{"prelude":0,"rest":true,"gamut":"—"},
+		{"prelude":0,"gamut": 3,"not": 16},
+		{"prelude":0,"gamut": 5,"not": 16},
+		{"prelude":0,"gamut": 3,"not": 16},
+		{"prelude":0,"gamut": 2,"not": 16,"divide":true},
+
+
+		{"prelude":0,"gamut": 7,"degree": -1},
+		{"prelude":0,"gamut": 2},
+		{"prelude":0,"gamut": 5,"degree": -1,"not": 8},
+		{"prelude":0,"gap":true,"gamut": 6,"degree": -1,"not": 8},
+		{"prelude":0,"gamut": 7,"degree": -1,"not": 16},
+		{"prelude":0,"gamut": 2,"not": 16},
+		{"prelude":0,"gamut": 7,"degree": -1,"not": 8,"divide":true},
+		{"prelude":0,"gamut": 6,"degree": -1},
+		{"prelude":1,"gamut":"—"},
+
+
+
+		{"gamut": 0,"not": 8},
+		{"gamut": 6,"fold":true,"gap":true,"not": 8},
+		{"across":-1,"gamut": 5,"not": 8},
+		{"gamut": 6,"not": 8,"across":1,"divide":true},
+
+		{"gamut": 1,"degree": 1,"not": 8},
+		{"gamut": 1,"across":-1,"degree": 1},
+		{"gamut": 7,"gap":true,"not": 8,"across":0},
+		{"gamut": 6,"across":0,"not": 16,"delay": true},
+		{"gamut": 7,"across":0,"not": 32},
+		{"gamut": 6,"across":0,"not": 16},
+		{"gamut": 3,"not": 16,"across":1},
+		{"gamut": 5,"rest":true,"across":1,"divide":true},
+
+		{"gamut": 0,"not": 8},
+		{"gamut": 6,"gap":true,"across":-1,"not": 8},
+		{"gamut": 3,"not": 16,"delay": true,"across":1},
+		{"gamut": 5,"not": 32},
+		{"gamut": 3,"not": 16},
+		{"gamut": 2,"not": 16,"across":1},
+		{"gamut": 1},
+		{"gamut":"—","rest":true,"divide":true},
+
+
+		{"gamut": 0,"not": 8},
+		{"gamut": 3,"gap":true,"not": 8},
+		{"across":-1,"gamut": 2,"not": 8},
+		{"gamut": 3,"gap":true,"not": 8,"across":0},
+		{"gamut": 5,"not": 8,"across":0,"delay": true},
+		{"gamut": 3,"not": 16,"across":0},
+		{"gamut": 5,"across":0,"divide":true},
+
+
+		{"gamut": 3,"across":0,"not": 16,"delay": true},
+		{"gamut": 5,"across":0,"not": 32},
+		{"gamut": 3,"across":0,"not": 16},
+		{"gamut": 2,"gap":true,"not": 16,"across":1},
+		{"gamut": 5,"degree": -1,"not": 8},
+		{"gamut": 7,"across":-1,"degree": -1,"not": 16},
+		{"gamut": 2,"not": 16,"across":"3"},
+		{"gamut": 7,"degree": -1,"not": 16,"across":1},
+		{"gamut": 6,"degree": -1},
+		{"gamut":"—","rest":true,"divide":true},
+
+
+		{"gamut": 0,"not": 8},
+		{"gamut": 1,"across":-1,"not": 8},
+		{"gamut": 7,"degree": -1,"not": 8,"across":0},
+		{"gamut": 6,"gap":true,"degree": -1,"not": 8,"across":1},
+		{"across":-1,"gamut": 2,"not": 8,"delay": true},
+		{"gamut": 3,"not": 16,"across":1},
+		{"gamut": 2,"rest":true,"divide":true},
+
+
+		{"gamut": 0,"not": 8},
+		{"gamut": 5,"gap":true,"not": 8},
+		{"across":-1,"gamut": 3,"not": 16,"delay": true},
+		{"gamut": 5,"across":0,"not": 32},
+		{"gamut": 3,"across":0,"not": 16},
+		{"gamut": 2,"gap":true,"not": 16,"across":1},
+		{"by":2,"gamut": 3,"not": 8},
+		{"gamut": 6,"degree": -1,"not": 8},
+		{"gamut": 1,"across":1,"divide":true},
+
+
+		{"gamut": 0,"not": 8},
+		{"gamut": 6,"gap":true,"not": 8},
+		{"across":-1,"gamut": 6,"not": 8},
+		{"gamut": 3,"across":0,"not": 16},
+		{"gamut": 5,"gap":true,"not": 16,"across":1},
+		{"gamut": 6,"not": 8},
+		{"gamut": 1,"across":-1,"degree": 1},
+		{"gamut": 7,"not": 8,"across":1,"divide":true},
+
+		{"gamut": 6},
+		{"across":-1,"gamut": 7,"not": 16,"delay": true},
+		{"gamut": 2,"degree": 1,"not": 32,"across":0},
+		{"gamut": 7,"across":0,"not": 16},
+		{"gamut": 6,"not": 16,"across":1},
+		{"by":6,"gamut": 5},
+		{"gamut":"—","rest":true,"divide":true},
+
+
+		{"gamut": 0,"not": 8},
+		{"by":5,"gap":true,"gamut": 3,"not": 8},
+		{"across":-1,"gamut": 2,"not": 8},
+		{"gamut": 3,"gap":true,"not": 8,"across":1},
+		{"across":-1,"gamut": 5,"not": 8,"delay": true},
+		{"gamut": 3,"not": 16,"across":1},
+		{"gamut": 5,"divide":true},
+
+
+
+		{"across":-1,"gamut": 3,"not": 16,"delay": true},
+		{"gamut": 5,"across":0,"not": 32},
+		{"gamut": 3,"across":0,"not": 16},
+		{"gamut": 2,"gap":true,"not": 16,"across":1},
+		{"gamut": 5,"degree": -1,"not": 8},
+		{"gamut": 7,"across":-1,"degree": -1,"not": 16},
+		{"gamut": 2,"not": 16,"across":"3"},
+		{"gamut": 7,"degree": -1,"not": 16,"across":1},
+		{"gamut": 6,"degree": -1},
+		{"gamut":"—","rest":true,"dividerepeat": 1},
+
+
+		{"gamut": 3},
+		{"gamut":"—"},
+		{"across":-1,"gamut": 5,"not": 8,"delay": true},
+		{"gamut": 6,"across":0,"gap":true,"not": 16},
+		{"gamut": 7,"across":0,"not": 8,"by":2},
+		{"gamut": 6,"not": 8,"across":1,"divide":true},
+
+
+		{"across":-1,"by":5,"gamut": 6},
+		{"across":0,"gamut":"—"},
+		{"across":0,"gamut":"—"},
+		{"across":0,"gamut":"—","divide":true},
+
+
+		{"gamut": 6,"across":1},
+		{"gamut":"—"},
+		{"gamut":"—"},
+		{"gamut":"—","divide":true}
+
+	]
+}
