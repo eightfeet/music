@@ -32,8 +32,8 @@ class Profile extends Component {
 			scss: c5,
 			selected: '5',
 			start: false,
-			startReady: 6,
-			customReady: 0,
+			startReady: 0,
+			customReady: 6,
 			audio: '1',
 			prelude: false,
 			hasPrelude: false
