@@ -2,6 +2,7 @@ import { h, Component } from 'preact';
 
 import { connect } from 'preact-redux';
 import { bindActionCreators } from 'redux';
+import Modal from '~/components/Modal';
 import { setRuntimeVariable } from '~/actions/user';
 import history from '~/core/history';
 import Request from '~/core/request';
@@ -16,13 +17,24 @@ class Home extends Component {
 		this.state = {
 			list: [],
 			oldList: [],
-			searchval: ''
+			searchval: '',
+			isOpen: false,
+			selected: null,
+			audio: null,
+			customReady: null,
+			fontSize: '1'
 		};
 	}
 
 
 	componentWillMount() {
 		this.getCatalog();
+		this.initConfig();
+	}
+
+	initConfig = () => {
+		const {selected, audio, customReady} = this.props;
+		this.setState({selected, audio, customReady});
 	}
 
 	componentDidMount() {
@@ -31,7 +43,7 @@ class Home extends Component {
 		6({(0:0,0.60,1}7__.2g___){(0:0,0.15,1}7__6__)){6}5- |  0_{5}3_(2_3_)(5_.3__)5 |  (3__.5___3__2__) 5d_{(3}{(0:0,0.60,1}7d__{(0:0,0.60,1}2__)7d__)) 6d- :|  3-(5_.6__{2g}7_6_) |  ({5}6--- |  6---) |`;
 
 		if (process.env.NODE_ENV === 'development') {
-			operationItem(outPutElement(testdata));
+			// operationItem(outPutElement(testdata));
 		}
 	}
 
@@ -69,14 +81,62 @@ class Home extends Component {
 		});
 	}
 
+	// Model
+	handleOpenModal = () => {
+		this.setState({isOpen: true});
+	}
+
+	handleHideModal = () => {
+		this.setState({isOpen: false});
+	}
+
+	selectFontSize = (e) => {
+		this.props.setStore({name:'selected', value:e.target.value});
+		switch (e.target.value) {
+			case '5':
+				this.setState({fontSize: 1, selected: '5'});
+				break;
+			case '4':
+				this.setState({fontSize: 1.2, selected: '4'});
+				break;
+			case '3':
+				this.setState({fontSize: 1.4, selected: '3'});
+				break;
+			case '2':
+				this.setState({fontSize: 1.6, selected: '2'});
+				break;
+			case '1':
+				this.setState({fontSize: 1.8, selected: '1'});
+				break;
+			default:
+				break;
+		}
+	}
+
+	selectAudio = (e) => {
+		this.setState({audio: e.target.value});
+		this.props.setStore({name:'audio', value:e.target.value});
+	}
+
+	selectCustomReady = (e) => {
+		this.props.setStore({name:'customReady', value:parseInt(e.target.value, 0)});
+		this.setState({customReady: parseInt(e.target.value, 0)});
+	}
+
 	render() {
 		const { list } = this.state;
 		return (
 			<div>
 				<div className={`clearfix formBox ${s.searchbar}`}>
-					<div>
-						<div className="ww">
-							<input placeholder="搜索" className="w9" value={this.state.searchval} onInput={this.search} type="text"/>
+					<div className="clearfix">
+						<div className="w7 fl">
+							<input placeholder="搜索" className="w9 font" value={this.state.searchval} onInput={this.search} type="text"/>
+						</div>
+						<div className="w3 fl">
+							<button
+								className={`${s.button} font`}
+								onClick={this.handleOpenModal}
+							>全局设置</button>
 						</div>
 					</div>
 				</div>
@@ -91,6 +151,51 @@ class Home extends Component {
 						</div>
 					</div>
 				</div>
+
+				<Modal
+					isOpen={this.state.isOpen}
+					contentLabel="Modal"
+					onRequestClose={this.handleHideModal}
+				>
+					<div className="pd1 al-c">
+						<div className="formBox clearfix pdt1">
+							<div className="fl w3-5 al-r pdt-5">字体大小:&nbsp;</div>
+							<div className="fl w5 mgb1">
+								<select style={{fontSize: `${this.state.fontSize}rem`, width: '100%'}} onChange={this.selectFontSize} value={this.state.selected} >
+									<option value="5" selected>5号简谱字体</option>
+									<option value="4">4号简谱字体</option>
+									<option value="3">3号简谱字体</option>
+									<option value="2">2号简谱字体</option>
+									<option value="1">1号简谱字体</option>
+								</select>
+							</div>
+							<div className="fl w3-5 al-r pdt-5">开启音符声:&nbsp;</div>
+							<div className="fl w5 mgb1">
+								<select onChange={this.selectAudio} value={this.state.audio} style={{width: '100%'}}>
+									<option value="1" selected>否</option>
+									<option value="2">是</option>
+								</select>
+							</div>
+							<div className="fl w3-5 al-r pdt-5">准备时间:&nbsp;</div>
+							<div className="fl w5 mgb1">
+								<select onChange={this.selectCustomReady} value={this.state.customReady} style={{width: '100%'}}>
+									<option value="6" selected>6秒</option>
+									<option value="5">5秒</option>
+									<option value="4">4秒</option>
+									<option value="3">3秒</option>
+									<option value="2">2秒</option>
+									<option value="1">1秒</option>
+									<option value="0">0秒</option>
+								</select>
+							</div>
+
+							<div className="al-c fl ww mgt2">
+								<button className="bg-green white pd-5" style={{width: '80%'}} onClick={this.handleHideModal}>确定</button>
+							</div>
+						</div>
+						<br />
+					</div>
+				</Modal>
 			</div>
 		);
 	}

@@ -64,12 +64,37 @@ class Profile extends Component {
 		}).catch(()=>Loading.hide());
 	}
 
-
 	componentDidMount() {
+		this.initModal();
 	}
 
 	componentWillUnmount() {
 		clearInterval(this.timer);
+	}
+
+	initModal = () => {
+		const {selected, audio, customReady} = this.props;
+		console.log(this.props);
+		this.setState({audio, customReady});
+		switch (selected) {
+			case '5':
+				this.setState({scss: c5, selected: '5'});
+				break;
+			case '4':
+				this.setState({scss: c4, selected: '4'});
+				break;
+			case '3':
+				this.setState({scss: c3, selected: '3'});
+				break;
+			case '2':
+				this.setState({scss: c2, selected: '2'});
+				break;
+			case '1':
+				this.setState({scss: c1, selected: '1'});
+				break;
+			default:
+				break;
+		}
 	}
 
 	namageData = (items) => {
@@ -77,7 +102,9 @@ class Profile extends Component {
 		data.forEach((item, index) => {
 			item.id = (index + 1).toString();
 		});
-		console.log(JSON.stringify(data));
+		if (process.env.NODE_ENV === 'development') {
+			// console.log(JSON.stringify(data));
+		}
 	}
 
 	init = () => {
@@ -346,31 +373,7 @@ class Profile extends Component {
 	}
 
 	selectCustomReady = (e) => {
-		switch (e.target.value) {
-			case '6':
-				this.setState({customReady: 6});
-				break;
-			case '5':
-				this.setState({customReady: 5});
-				break;
-			case '4':
-				this.setState({customReady: 4});
-				break;
-			case '3':
-				this.setState({customReady: 3});
-				break;
-			case '2':
-				this.setState({customReady: 2});
-				break;
-			case '1':
-				this.setState({customReady: 1});
-				break;
-			case '0':
-				this.setState({customReady: 0});
-				break;
-			default:
-				break;
-		}
+		this.setState({customReady: parseInt(e.target.value, 0)});
 	}
 
 	setTime = (e) => {
@@ -404,21 +407,21 @@ class Profile extends Component {
 						start ?
 							(
 								<span>
-									<button className="bg-orange white pd-5 mgr1" onClick={this.handleStop}>暂停</button>
-									<button className="bg-green white pd-5 mgr1" onClick={this.handleReset}>重置</button>
+									<button className="font bg-orange white pd-5 mgr1" onClick={this.handleStop}>暂停</button>
+									<button className="font bg-green white pd-5 mgr1" onClick={this.handleReset}>重置</button>
 								</span>
 							) :
 							<span>
-								<button className="bg-green white pd-5 mgr1" onClick={this.handleStart}>开始</button>
+								<button className="font bg-green white pd-5 mgr1" onClick={this.handleStart}>开始</button>
 								{
-									hasPrelude ? <button className={`${prelude ? 'bg-green' : 'bg-orange'} white pd-5 mgr1`} onClick={this.handlePrelude}>
+									hasPrelude ? <button className={`${prelude ? 'bg-green' : 'bg-orange'} white font pd-5 mgr1`} onClick={this.handlePrelude}>
 										{prelude ? '显示伴奏' : '隐藏伴奏'}
 									</button> : null
 								}
 							</span>
 
 					}
-					<button className="bg-green white pd-5" onClick={this.handleOpenModal}>设置</button>
+					<button className="font bg-green white pd-5" onClick={this.handleOpenModal}>设置</button>
 					{
 						startReady > 0 ? <span className="blue font-biggest pdl2">{ startReady }</span> : ''
 					}

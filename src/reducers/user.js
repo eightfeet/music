@@ -1,4 +1,7 @@
 const defaultState = {
+	selected: '5',
+	audio: '1',
+	customReady: 6
 };
 const reducer = (state = defaultState, action) => {
 	const data = {};
