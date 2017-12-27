@@ -103,7 +103,7 @@ class Profile extends Component {
 			item.id = (index + 1).toString();
 		});
 		if (process.env.NODE_ENV === 'development') {
-			// console.log(JSON.stringify(data));
+			console.log(JSON.stringify(data));
 		}
 	}
 

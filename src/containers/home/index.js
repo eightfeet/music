@@ -43,7 +43,7 @@ class Home extends Component {
 		6({(0:0,0.60,1}7__.2g___){(0:0,0.15,1}7__6__)){6}5- |  0_{5}3_(2_3_)(5_.3__)5 |  (3__.5___3__2__) 5d_{(3}{(0:0,0.60,1}7d__{(0:0,0.60,1}2__)7d__)) 6d- :|  3-(5_.6__{2g}7_6_) |  ({5}6--- |  6---) |`;
 
 		if (process.env.NODE_ENV === 'development') {
-			// operationItem(outPutElement(testdata));
+			operationItem(outPutElement(testdata));
 		}
 	}
 
