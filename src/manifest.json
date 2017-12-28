@@ -1,6 +1,6 @@
 {
-  "name": "by-health",
-  "short_name": "by-health",
+  "name": "简谱",
+  "short_name": "洞箫简谱",
   "start_url": "./",
   "display": "standalone",
   "orientation": "portrait",
