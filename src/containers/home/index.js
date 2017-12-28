@@ -161,7 +161,7 @@ class Home extends Component {
 						<div className="formBox clearfix pdt1">
 							<div className="fl w3-5 al-r pdt-5">字体大小:&nbsp;</div>
 							<div className="fl w5 mgb1">
-								<select style={{fontSize: `${this.state.fontSize}rem`, width: '100%'}} onChange={this.selectFontSize} value={this.state.selected} >
+								<select style={{fontSize: `${this.state.fontSize}rem`, width: '100%'}} onChange={this.selectFontSize} className=" font" value={this.state.selected} >
 									<option value="5" selected>5号简谱字体</option>
 									<option value="4">4号简谱字体</option>
 									<option value="3">3号简谱字体</option>
@@ -171,14 +171,14 @@ class Home extends Component {
 							</div>
 							<div className="fl w3-5 al-r pdt-5">开启音符声:&nbsp;</div>
 							<div className="fl w5 mgb1">
-								<select onChange={this.selectAudio} value={this.state.audio} style={{width: '100%'}}>
+								<select className="font" onChange={this.selectAudio} value={this.state.audio} style={{width: '100%'}}>
 									<option value="1" selected>否</option>
 									<option value="2">是</option>
 								</select>
 							</div>
 							<div className="fl w3-5 al-r pdt-5">准备时间:&nbsp;</div>
 							<div className="fl w5 mgb1">
-								<select onChange={this.selectCustomReady} value={this.state.customReady} style={{width: '100%'}}>
+								<select onChange={this.selectCustomReady} value={this.state.customReady} className=" font" style={{width: '100%'}}>
 									<option value="6" selected>6秒</option>
 									<option value="5">5秒</option>
 									<option value="4">4秒</option>
@@ -190,7 +190,7 @@ class Home extends Component {
 							</div>
 
 							<div className="al-c fl ww mgt2">
-								<button className="bg-green white pd-5" style={{width: '80%'}} onClick={this.handleHideModal}>确定</button>
+								<button className="bg-green font white pd-5" style={{width: '80%'}} onClick={this.handleHideModal}>确定</button>
 							</div>
 						</div>
 						<br />
