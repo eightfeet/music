@@ -230,7 +230,7 @@
 		{"gamut":1,"degree":1,"id":"222"},
 		{"gamut":"—","id":"223"},
 		{"gamut":"—","id":"224"},
-		{"gamut":1,"not":8,"across":-1,"id":"225","fadeIn":4},
+		{"gamut":7,"not":8,"across":-1,"id":"225","fadeIn":4},
 		{"gamut":1,"degree":1,"not":16,"across":0,"id":"226"},
 		{"gamut":7,"not":16,"across":1,"divide":true,"id":"227"},
 		{"gamut":6,"id":"228"},
