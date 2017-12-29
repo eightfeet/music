@@ -494,7 +494,7 @@ class Profile extends Component {
 								</select>
 							</div>
 							<div className="fl w3-5 al-r pdt-5 mgb1">节拍(毫秒):&nbsp;</div>
-							<div className="fl w5 mgb1"><input type="number" onChange={this.setTime} value={this.state.times} preload="毫秒" maxLength="4"/></div>
+							<div className="fl w5 mgb1"><input type="number" onChange={this.setTime} className="font" value={this.state.times} preload="毫秒" maxLength="4"/></div>
 
 							<div className="fl w3-5 al-r pdt-5">准备时间:&nbsp;</div>
 							<div className="fl w5 mgb1">
