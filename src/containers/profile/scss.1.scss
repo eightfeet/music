@@ -8,7 +8,6 @@ $baserem :9rem;
 }
 
 .item {
-	width: $baserem * 0.5;
 	height: $baserem;
 	display: inline-block;
 	line-height: $baserem;
@@ -24,7 +23,7 @@ $baserem :9rem;
 	height: 12px;
 	div {
 		height: 2px;
-		border-top: 2px solid #000000;
+		border-top: 1px solid #000000;
 	}
 }
 
@@ -35,7 +34,7 @@ $baserem :9rem;
 	line-height: $baserem;
 	vertical-align:middle;
 	display: inline-block;
-	border: $baserem * 0.04 solid #fff;
+	border: 1px solid #fff;
 	position: absolute;
 	right: -1px;
 	z-index: 10;
@@ -85,7 +84,7 @@ $baserem :9rem;
 		position: absolute;
 		width: 100%;
 		border-top: 1px solid #000;
-		top: $baserem * 0.1;
+		top: $baserem * 0.14;
 		height: $baserem * 0.1;
 	}
 	.subscript {
@@ -99,20 +98,18 @@ $baserem :9rem;
 }
 
 .leftacross {
-	width: $baserem * 0.25;
-	height: $baserem * 0.25;
+	height: $baserem * 0.07;
 	position: absolute;
 	top: $baserem * 0.1;
 	right: 0;
 	border-left: 1px solid #000;
 	border-top: 1px solid #000;
-	border-radius: $baserem * 0.5 0 0 0;
+	border-radius: $baserem * 0.07 0 0 0;
 	z-index: 10;
 }
 
 .across {
-	width: 100%;
-	height: $baserem * 0.25;
+	height: 0.8rem;
 	position: absolute;
 	top: $baserem * 0.1;
 	right: 0;
@@ -136,14 +133,13 @@ $baserem :9rem;
 }
 
 .rightacross {
-	width: $baserem * 0.25;
-	height: $baserem * 0.25;
+	height: $baserem * 0.07;
 	position: absolute;
 	top: $baserem * 0.1;
 	left: 0;
 	border-right: 1px solid #000;
 	border-top: 1px solid #000;
-	border-radius: 0 $baserem * 0.5 0 0;
+	border-radius: 0 $baserem * 0.07 0 0;
 	z-index: 10;
 }
 
@@ -155,7 +151,7 @@ $baserem :9rem;
 	border-radius: 4px;
 	background-color: #000000;
 	position: absolute;
-	right: $baserem * 0.1;
+	right: $baserem * 0.05;
 }
 
 .gap {
@@ -277,7 +273,7 @@ $baserem :9rem;
 	right: -$baserem * 0.2;
 	background-color: #fff;
 	font-size: 2rem;
-	z-index: 10;
+	z-index: -1;
 	color: $orange;
 
 	span {
@@ -302,7 +298,7 @@ $baserem :9rem;
 	right: -$baserem * 0.1;
 	background-color: #fff;
 	font-size: 2rem;
-	z-index: 10;
+	z-index: -1;
 	color: $orange;
 
 	span {

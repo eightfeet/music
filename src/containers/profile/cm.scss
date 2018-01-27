@@ -8,6 +8,17 @@
 	left: 0;
 }
 
+.ready {
+	display: block;
+	font-size: 10rem;
+	position: absolute;
+	color: $blue;
+	width: 100%;
+	text-align: center;
+	top: 10rem;
+	z-index: 20;
+}
+
 .selected {
 	color: red;
 	font-weight: bolder;

@@ -21,6 +21,7 @@ class Profile extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
+			baserem: 5,
 			items: [],
 			currentindex: 0,
 			title: '',
@@ -36,7 +37,9 @@ class Profile extends Component {
 			customReady: 6,
 			audio: '1',
 			prelude: false,
-			hasPrelude: false
+			hasPrelude: false,
+			music: null,
+			forbidmusic: null
 		};
 		this.timer = null;
 	}
@@ -54,6 +57,7 @@ class Profile extends Component {
 				times: res.rhythm,
 				title: res.title,
 				authora: res.authora,
+				music: res.music,
 				authorb: res.authorb,
 				oldContent: JSON.parse(JSON.stringify(res)),
 				hasPrelude: res.hasPrelude
@@ -110,7 +114,7 @@ class Profile extends Component {
 	init = () => {
 		let operationData = JSON.parse(JSON.stringify(this.state.oldContent.content));
 
-
+		this.musicAction(3);
 		if (this.state.prelude) {
 			const tempArr = [];
 			operationData.forEach(item => {
@@ -183,9 +187,9 @@ class Profile extends Component {
 		}
 	}
 
-	renderBy = (by) => {
+	renderBy = (by, selected) => {
 		if (by) {
-			return (<div className={this.state.scss.by}>
+			return (<div className={`${this.state.scss.by} ${selected ? s.selected : ''}`}>
 				<div className={this.state.scss.bytag} >
 					<div className={this.state.scss.subscript} />
 				</div>
@@ -194,18 +198,19 @@ class Profile extends Component {
 		}
 	}
 
-	renderAcross = (across, gap) => {
+	renderAcross = (across, gap, not) => {
+		// let style = {width: not === };
 		if (typeof across === 'string') {
 			return (<div className={classNames(this.state.scss.across, gap ? this.state.scss.acrossgap : null)} ><span> {across} </span></div>);
 		}
 		if (across === -1 ) {
-			return (<div className={classNames(this.state.scss.leftacross, gap ? this.state.scss.acrossgap : null)} />);
+			return (<div className={classNames(this.state.scss.leftacross, gap ? this.state.scss.acrossgap : null)} style={{width:'50%'}} />);
 		}
 		if (across === 0 ) {
 			return (<div className={classNames(this.state.scss.across, gap ? this.state.scss.acrossgap : null)} />);
 		}
 		if (across === 1 ) {
-			return (<div className={this.state.scss.rightacross} />);
+			return (<div className={this.state.scss.rightacross} style={{width:'50%'}} />);
 		}
 	}
 
@@ -287,6 +292,7 @@ class Profile extends Component {
 		}
 		let oprationInd = currentindex;
 		items[oprationInd].selected = true;
+		const stoppageTime = items[oprationInd].stoppageTime || 0;
 		if (this.state.items[oprationInd].not === 8) {
 			oprationTimes = oprationTimes / 2;
 		}
@@ -309,12 +315,13 @@ class Profile extends Component {
 			if (this.state.audio === '2') {
 				this.audio.play();
 			}
-		}, oprationTimes );
+		}, oprationTimes + stoppageTime );
 	}
 
 
 
 	handleStart = () => {
+		const {forbidmusic, music } = this.state;
 		this.setState({
 			start: true,
 			startReady: this.state.customReady
@@ -324,14 +331,61 @@ class Profile extends Component {
 				this.setState({startReady: this.state.startReady - 1});
 				if (this.state.startReady < 0) {
 					clearInterval(this.readTimer);
-					this.resetTimer();
+					if (!forbidmusic && music ) {
+						this.musicAction(0, this.resetTimer);
+					} else {
+						this.resetTimer();
+					}
+
 				}
 			}, 1000);
 		});
 	}
+
+	handleForbidMusic = () => {
+		this.setState({
+			forbidmusic: true
+		}, () => {
+			this.music.currentTime=0;
+			this.music.pause();
+		});
+	}
+
+	musicAction = (status, fun) => {
+		const {forbidmusic} = this.state;
+		if (forbidmusic) {
+			return;
+		}
+		switch (status) {
+			case 0: // 播放
+				this.music.play();
+				this.music.onplay = fun;
+				break;
+			case 1: // 暂停
+				this.music.pause();
+				break;
+			case 2: // 重新播放
+				this.musicReplay();
+				this.music.onplay = fun;
+				break;
+			case 3: // 重置
+				this.music.currentTime=0;
+				this.music.pause();
+				break;
+			default:
+				break;
+		}
+	}
+
+	musicReplay = () => {
+		this.music.currentTime=0;
+		this.music.play();
+	}
+
 	handleStop = () => {
 		clearInterval(this.timer);
 		clearInterval(this.readTimer);
+		this.musicAction(1);
 		this.setState({
 			start: false,
 			startReady: 0
@@ -343,7 +397,8 @@ class Profile extends Component {
 		this.setState({
 			start: false,
 			startReady: 0,
-			customReady: 6
+			customReady: 6,
+			forbidmusic: null
 		});
 		this.init();
 		clearInterval(this.readTimer);
@@ -353,19 +408,19 @@ class Profile extends Component {
 	selectFontSize = (e) => {
 		switch (e.target.value) {
 			case '5':
-				this.setState({scss: c5, selected: '5'});
+				this.setState({scss: c5, selected: '5', baserem: 5});
 				break;
 			case '4':
-				this.setState({scss: c4, selected: '4'});
+				this.setState({scss: c4, selected: '4', baserem: 6});
 				break;
 			case '3':
-				this.setState({scss: c3, selected: '3'});
+				this.setState({scss: c3, selected: '3', baserem: 7});
 				break;
 			case '2':
-				this.setState({scss: c2, selected: '2'});
+				this.setState({scss: c2, selected: '2', baserem: 8});
 				break;
 			case '1':
-				this.setState({scss: c1, selected: '1'});
+				this.setState({scss: c1, selected: '1', baserem: 9});
 				break;
 			default:
 				break;
@@ -388,12 +443,31 @@ class Profile extends Component {
 		history.push('/');
 	}
 
+	getItemWidth = (item) => {
+		const { baserem } = this.state;
+		let widthrem = baserem/(1.5);
+		switch (item.not) {
+			case 8:
+				widthrem = widthrem / 2;
+				break;
+			case 16:
+				widthrem = widthrem / 4;
+				break;
+			default:
+				break;
+		}
+		return widthrem;
+	}
+
 	render() {
-		const { authora, authorb, title, start, startReady, hasPrelude, prelude } = this.state;
+		const { authora, authorb, title, start, startReady, hasPrelude, prelude, music, forbidmusic } = this.state;
 		return (
 			<div className={this.state.scss.root} ref={(ref)=>{this.root = ref;}}>
 				<div>
 					<audio ref={(ref)=>{this.audio = ref;}} src="./assets/data/6596.mp3">您的浏览器不支持 audio 标签。</audio>
+				</div>
+				<div>
+					<audio ref={(ref)=>{this.music = ref;}} src={music}>您的浏览器不支持 audio 标签。</audio>
 				</div>
 				<div className={s.btn}>
 					{
@@ -414,18 +488,21 @@ class Profile extends Component {
 							<span>
 								<button className="font bg-green white pd-5 mgr1" onClick={this.handleStart}>开始</button>
 								{
-									hasPrelude ? <button className={`${prelude ? 'bg-green' : 'bg-orange'} white font pd-5 mgr1`} onClick={this.handlePrelude}>
-										{prelude ? '显示伴奏' : '隐藏伴奏'}
+									hasPrelude && !music ? <button className={`${prelude ? 'bg-green' : 'bg-orange'} white font pd-5 mgr1`} onClick={this.handlePrelude}>
+										{prelude ? '显示过门' : '隐藏过门'}
 									</button> : null
 								}
 							</span>
 
 					}
-					<button className="font bg-green white pd-5" onClick={this.handleOpenModal}>设置</button>
-					{
-						startReady > 0 ? <span className="blue font-biggest pdl2">{ startReady }</span> : ''
-					}
+					{music ? <span>
+						{forbidmusic === true ?  null : <button className="font bg-green white pd-5 mgr1" onClick={this.handleForbidMusic}>清除伴奏</button>}
+					</span> : null}
+					{!music ? <button className="font bg-green white pd-5" onClick={this.handleOpenModal}>设置</button> : null}
 				</div>
+				{
+					startReady > 0 ? <span className={s.ready}>{ startReady }</span> : ''
+				}
 				<div className={this.state.scss.main}>
 					<h1 className="al-c">{title}</h1>
 					<div className="al-r">{authora}<br />{authorb}</div>
@@ -436,7 +513,7 @@ class Profile extends Component {
 									{
 										item.partTitle ?
 											<div className={s.con} dangerouslySetInnerHTML={{__html:item.gamut}} /> :
-											<div className={this.state.scss.item}>
+											<div className={this.state.scss.item} style={{width:`${this.getItemWidth(item)}rem`}}>
 												<div className={`${this.state.scss.gamut} ${item.selected ? s.selected : ''}`}>
 													{item.gamut}
 													{
@@ -452,8 +529,8 @@ class Profile extends Component {
 												{this.renderRest(item.rest)}
 												{this.rendNot(item.not)}
 												{this.renderDegree(item.degree)}
-												{this.renderBy(item.by)}
-												{this.renderAcross(item.across, item.gap)}
+												{this.renderBy(item.by, item.selected)}
+												{this.renderAcross(item.across, item.gap, item.not)}
 												{this.renderShake(item.shake)}
 												{this.renderLong(item.long)}
 												{this.renderPrelude(item.prelude)}
