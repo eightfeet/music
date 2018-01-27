@@ -16,6 +16,9 @@ import c3 from './scss.3';
 import c4 from './scss.4';
 import c5 from './scss.5';
 
+const u = navigator.userAgent;
+// const isAndroid = u.indexOf('Android') > -1 || u.indexOf('Adr') > -1; //android终端
+const isiOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios终端
 
 class Profile extends Component {
 	constructor(props) {
@@ -65,6 +68,17 @@ class Profile extends Component {
 				this.init();
 				Loading.hide();
 			});
+
+			if (res.music) {
+				const audio = document.createElement("audio");
+				   audio.src =res.music;
+				   audio.controls = true;
+				document.body.appendChild(audio);
+				audio.play();
+				audio.pause();
+				this.music.play();
+				this.music.pause();
+			}
 		}).catch(()=>Loading.hide());
 	}
 
@@ -278,6 +292,7 @@ class Profile extends Component {
 	}
 
 	resetTimer = () => {
+		Loading.hide();
 		clearInterval(this.timer);
 		let oprationTimes = this.state.times;
 		const {currentindex, items} = this.state;
@@ -292,7 +307,11 @@ class Profile extends Component {
 		}
 		let oprationInd = currentindex;
 		items[oprationInd].selected = true;
-		const stoppageTime = items[oprationInd].stoppageTime || 0;
+		let stoppageTime = items[oprationInd].stoppageTime || 0;
+		if (isiOS) {
+			stoppageTime = stoppageTime + 50;
+		}
+
 		if (this.state.items[oprationInd].not === 8) {
 			oprationTimes = oprationTimes / 2;
 		}
@@ -326,11 +345,11 @@ class Profile extends Component {
 			start: true,
 			startReady: this.state.customReady
 		}, () => {
-
 			this.readTimer = setInterval(() => {
 				this.setState({startReady: this.state.startReady - 1});
 				if (this.state.startReady < 0) {
 					clearInterval(this.readTimer);
+					Loading.show();
 					if (!forbidmusic && music ) {
 						this.musicAction(0, this.resetTimer);
 					} else {
@@ -464,10 +483,14 @@ class Profile extends Component {
 		return (
 			<div className={this.state.scss.root} ref={(ref)=>{this.root = ref;}}>
 				<div>
-					<audio ref={(ref)=>{this.audio = ref;}} src="./assets/data/6596.mp3">您的浏览器不支持 audio 标签。</audio>
+					<audio ref={(ref)=>{this.audio = ref;}} src="./assets/data/6596.mp3">
+						您的浏览器不支持 audio 标签。
+					</audio>
 				</div>
 				<div>
-					<audio ref={(ref)=>{this.music = ref;}} src={music}>您的浏览器不支持 audio 标签。</audio>
+					<audio ref={(ref)=>{this.music = ref;}}  src={music}>
+						您的浏览器不支持 audio 标签。
+					</audio>
 				</div>
 				<div className={s.btn}>
 					{
@@ -498,7 +521,7 @@ class Profile extends Component {
 					{music ? <span>
 						{forbidmusic === true ?  null : <button className="font bg-green white pd-5 mgr1" onClick={this.handleForbidMusic}>清除伴奏</button>}
 					</span> : null}
-					{!music ? <button className="font bg-green white pd-5" onClick={this.handleOpenModal}>设置</button> : null}
+					<button className="font bg-green white pd-5" onClick={this.handleOpenModal}>设置</button>
 				</div>
 				{
 					startReady > 0 ? <span className={s.ready}>{ startReady }</span> : ''
@@ -570,8 +593,8 @@ class Profile extends Component {
 									<option value="2">是</option>
 								</select>
 							</div>
-							<div className="fl w3-5 al-r pdt-5 mgb1">节拍(毫秒):&nbsp;</div>
-							<div className="fl w5 mgb1"><input type="number" onChange={this.setTime} className="font" value={this.state.times} preload="毫秒" maxLength="4"/></div>
+							{!music ? <div className="fl w3-5 al-r pdt-5 mgb1">节拍(毫秒):&nbsp;</div> : null}
+							{!music ? <div className="fl w5 mgb1"><input type="number" onChange={this.setTime} className="font" value={this.state.times} preload="毫秒" maxLength="4"/></div> : null}
 
 							<div className="fl w3-5 al-r pdt-5">准备时间:&nbsp;</div>
 							<div className="fl w5 mgb1">

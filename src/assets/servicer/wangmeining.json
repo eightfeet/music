@@ -4,8 +4,8 @@
 	"name": "wangmeining",
 	"authora": "电视剧《红楼梦》插曲",
 	"authorb": "王立平 曲 筒音作低3",
-	"rhythm": 900,
-	"music": "./assets/music/wangmeining.m4a",
+	"rhythm": 800,
+	"music": "./assets/music/wangmeining.mp3",
 	"hasPrelude": true,
 	"content": [
 		{"prelude":-1,"gamut":6,"degree":-1,"by":321,"id":"1"},
