@@ -72,12 +72,15 @@ class Profile extends Component {
 			if (res.music) {
 				const audio = document.createElement("audio");
 				   audio.src =res.music;
-				   audio.controls = true;
 				document.body.appendChild(audio);
-				audio.play();
-				audio.pause();
-				this.music.play();
-				this.music.pause();
+				// audio.play();
+				// audio.pause();
+				// this.music.play();
+				// this.music.pause();
+				Loading.show();
+				this.music.addEventListener("canplaythrough", () => {
+					Loading.hide();
+				});
 			}
 		}).catch(()=>Loading.hide());
 	}
@@ -349,7 +352,6 @@ class Profile extends Component {
 				this.setState({startReady: this.state.startReady - 1});
 				if (this.state.startReady < 0) {
 					clearInterval(this.readTimer);
-					Loading.show();
 					if (!forbidmusic && music ) {
 						this.musicAction(0, this.resetTimer);
 					} else {
@@ -375,6 +377,7 @@ class Profile extends Component {
 		if (forbidmusic) {
 			return;
 		}
+
 		switch (status) {
 			case 0: // 播放
 				this.music.play();
