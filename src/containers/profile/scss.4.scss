@@ -77,7 +77,7 @@ $baserem :8rem;
 	font-weight: bold;
 	position: absolute;
 	left: 0;
-	top: $baserem * 0.1;
+	top: $baserem * 0.2;
 	z-index: 11;
 
 	.bytag {
@@ -129,7 +129,7 @@ $baserem :8rem;
 
 .acrossgap {
 	padding-right: $baserem * 0.1 + $baserem * 0.25;
-	right: -$baserem * 0.25;
+	right: -$baserem * 0.1;
 }
 
 .rightacross {
@@ -151,7 +151,7 @@ $baserem :8rem;
 	border-radius: 4px;
 	background-color: #000000;
 	position: absolute;
-	right: $baserem * 0.05;
+	right: -2px;
 }
 
 .gap {

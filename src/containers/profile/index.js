@@ -77,10 +77,18 @@ class Profile extends Component {
 				// audio.pause();
 				// this.music.play();
 				// this.music.pause();
-				Loading.show();
-				this.music.addEventListener("canplaythrough", () => {
-					Loading.hide();
-				});
+				if (!isiOS) {
+					Loading.show();
+					this.music.addEventListener("canplaythrough", () => {
+						Loading.hide();
+					});
+				}
+				this.music.onplay = () => {
+					this.handleStart();
+				};
+				this.music.onpause = () => {
+					this.handleStop();
+				};
 			}
 		}).catch(()=>Loading.hide());
 	}
@@ -130,8 +138,10 @@ class Profile extends Component {
 
 	init = () => {
 		let operationData = JSON.parse(JSON.stringify(this.state.oldContent.content));
-
-		this.musicAction(3);
+		if (this.state.music) {
+			this.music.currentTime=0;
+			this.music.pause();
+		}
 		if (this.state.prelude) {
 			const tempArr = [];
 			operationData.forEach(item => {
@@ -344,6 +354,16 @@ class Profile extends Component {
 
 	handleStart = () => {
 		const {forbidmusic, music } = this.state;
+		if (!forbidmusic && music) {
+			this.music.play();
+			this.resetTimer();
+			this.setState({
+				start: true,
+				startReady: 0
+			});
+			return;
+		}
+
 		this.setState({
 			start: true,
 			startReady: this.state.customReady
@@ -352,12 +372,7 @@ class Profile extends Component {
 				this.setState({startReady: this.state.startReady - 1});
 				if (this.state.startReady < 0) {
 					clearInterval(this.readTimer);
-					if (!forbidmusic && music ) {
-						this.musicAction(0, this.resetTimer);
-					} else {
-						this.resetTimer();
-					}
-
+					this.resetTimer();
 				}
 			}, 1000);
 		});
@@ -467,7 +482,7 @@ class Profile extends Component {
 
 	getItemWidth = (item) => {
 		const { baserem } = this.state;
-		let widthrem = baserem/(1.5);
+		let widthrem = baserem;
 		switch (item.not) {
 			case 8:
 				widthrem = widthrem / 2;
@@ -475,7 +490,11 @@ class Profile extends Component {
 			case 16:
 				widthrem = widthrem / 4;
 				break;
+			case 32:
+				widthrem = widthrem / 4;
+				break;
 			default:
+				widthrem = baserem/(1.5);
 				break;
 		}
 		return widthrem;
@@ -490,11 +509,11 @@ class Profile extends Component {
 						您的浏览器不支持 audio 标签。
 					</audio>
 				</div>
-				<div>
-					<audio ref={(ref)=>{this.music = ref;}}  src={music}>
+				{music ? <div>
+					<audio ref={(ref)=>{this.music = ref;}} controls className={s.audio}  src={music}>
 						您的浏览器不支持 audio 标签。
 					</audio>
-				</div>
+				</div> : null}
 				<div className={s.btn}>
 					{
 						!start ?
